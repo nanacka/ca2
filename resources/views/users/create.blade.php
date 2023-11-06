@@ -11,13 +11,13 @@
 @extends('layouts.app')
 
 @section('content')
-    <h3 class="text-center">Create post</h3>
-    <form action="{{ route('posts.store') }}" method="post">
+    <h3 class="text-center">Create user</h3>
+    <form action="{{ route('users.store') }}" method="POST">
 
         @csrf
         {{-- ^^ generates a hidden input named csrf_token for security, needed to submit form--}}
         <div class="form-group">
-            <label for="title">post Title</label>
+            <label for="title">user Title</label>
             <input type="text" name="title" id="title" class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" value="{{ old('title') }}" placeholder="Enter Title">
             @if($errors->has('title'))
                 <span class="invalid-feedback">
@@ -26,8 +26,8 @@
             @endif
         </div>
         <div class="form-group">
-            <label for="body">post Description</label>
-            <textarea name="body" id="body" rows="4" class="form-control {{ $errors->has('body') ? 'is-invalid' : '' }}" placeholder="Enter post Description">{{ old('body') }}</textarea>
+            <label for="body">user Description</label>
+            <textarea name="body" id="body" rows="4" class="form-control {{ $errors->has('body') ? 'is-invalid' : '' }}" placeholder="Enter user Description">{{ old('body') }}</textarea>
 
             {{--error handling--}}
             

@@ -12,21 +12,23 @@
 @extends('layouts.app')
 
     @section('content')
-        <h2 class="text-center">All posts</h2>
+        <h2 class="text-center">All users</h2>
         <ul class="list-group py-3 mb-3">
-            @forelse($posts as $post)
+
+            @forelse($users as $user)
+
                 <li class="list-group-item my-2">
-                    <h5>{{ $post->title }}</h5>
-                    <p>{{ Str::limit($post->desc,10) }}</p>
-                    <small class="float-right">{{ $post->date_created->diffForHumans() }}</small>
-                    <a href="{{route('posts.show',$post->id)}}">Read More</a>
+                    <h5>{{ $user->username }}</h5>
+                    <a href="{{route('users.show',$user->id)}}">Read More</a>
                 </li>
+
             @empty
-                <h4 class="text-center">No posts Found!</h4>
+                <h4 class="text-center">No users Found!</h4>
             @endforelse
+            
         </ul>
         <div class="d-flex justify-content-center">
-            {{ $posts->links() }}
+            {{ $users->links() }}
         </div>
 
     @endsection
