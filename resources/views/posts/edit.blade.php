@@ -11,13 +11,13 @@
 @extends('layouts.app')
 
 @section('content')
-    <h3 class="text-center">Edit Todo</h3>
-    <form action="{{route('todos.update',$todo->id)}}" method="post">
+    <h3 class="text-center">Edit Post</h3>
+    <form action="{{route('posts.update',$post->id)}}" method="post">
         @csrf
         @method('PUT')
         <div class="form-group">
-            <label for="title">Todo Title</label>
-            <input type="text" name="title" id="title" class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" value="{{ old('title') ? : $todo->title }}" placeholder="Enter Title">
+            <label for="title">Post Title</label>
+            <input type="text" name="title" id="title" class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" value="{{ old('title') ? : $post->title }}" placeholder="Enter Title">
             @if($errors->has('title')) {{-- <-check if we have a validation error --}}
                 <span class="invalid-feedback">
                     {{$errors->first('title')}} {{-- <- Display the First validation error --}}
@@ -25,8 +25,8 @@
             @endif
         </div>
         <div class="form-group">
-            <label for="body">Todo Description</label>
-            <textarea name="body" id="body" rows="4" class="form-control {{ $errors->has('body') ? 'is-invalid' : '' }}" placeholder="Enter Todo Description">{{ old('body') ? : $todo->body }}</textarea>
+            <label for="body">Post Description</label>
+            <textarea name="body" id="body" rows="4" class="form-control {{ $errors->has('body') ? 'is-invalid' : '' }}" placeholder="Enter Post Description">{{ old('body') ? : $post->body }}</textarea>
             @if($errors->has('body')) {{-- <-check if we have a validation error --}}
                 <span class="invalid-feedback">
                     {{$errors->first('body')}} {{-- <- Display the First validation error --}}

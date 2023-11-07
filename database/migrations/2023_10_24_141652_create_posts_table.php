@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->foreignId('user_id');
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->date('date_created');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->timestamps();
         });
     }
 

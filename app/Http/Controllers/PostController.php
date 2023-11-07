@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Post;
 
 class PostController extends Controller
 {
@@ -87,10 +88,10 @@ class PostController extends Controller
      */
 
 
-    //public function update(Request $request, string $id)
-    //{
-    //    //
-    //}
+    public function update(Request $request, string $id)
+    {
+        
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -99,8 +100,8 @@ class PostController extends Controller
 
     public function destroy($id)
     {
-        $todo = Todo::findOrFail($id);
-        $todo->delete();
+        $post = Post::findOrFail($id);
+        $post->delete();
 
         return redirect()
             ->route('posts.index')

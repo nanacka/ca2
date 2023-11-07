@@ -13,11 +13,17 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        //$admin = new User;
-        //$admin->username = "Felix";
-        //$admin->email = "admin@ca1example.com";
-        //$admin->password = "secret123";
-        //$admin->save();
+        //$admin1 = new User;
+        //$admin1->username = "Felix";
+        //$admin1->email = "admin@ca1example.com";
+        //$admin1->password = "secret123";
+        //$admin1->save();
+
+        //$admin2 = new User;
+        //$admin2->name = "another one";
+        //$admin2->email = "sample";
+        //$admin2->password = "secret123";
+        //$admin2->save();
 
         //public function run(){
         //    $user1 = new User
@@ -26,10 +32,11 @@ class UserSeeder extends Seeder
         //    $user1->password = "secret";
         //}
 
-        $user1 = new User;
-        $user1->username = "sample";
-        $user1->email = "email";
-        $user1->password = "secret";
-        $user1->save();
+        //$user1 = new User;
+        //$user1->username = "sample";
+        //$user1->email = "email";
+        //$user1->password = "secret";
+        //$user1->save();
+        User::factory()->count(20)->create();
     }
 }

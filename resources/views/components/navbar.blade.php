@@ -16,10 +16,10 @@
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="{{route('todos.index')}}" class="nav-link">Todos</a>
+                    <a href="{{route('posts.index')}}" class="nav-link">Posts</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('todos.create')}}" class="nav-link">New todo</a>
+                    <a href="{{route('posts.create')}}" class="nav-link">New post</a>
                 </li>
             </ul>
         </div>

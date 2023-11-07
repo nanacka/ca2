@@ -1,16 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
 
-    @extends('layouts.app')
+@extends('layouts.app')
 
 @section('content')
+
     <h3 class="text-center">{{$post->title}}</h3>
     <p>{{$post->body}}</p>
     <br>
@@ -36,11 +28,10 @@
         </div>
         </div>
     </div>
+    
     <form method="POST" id="delete-form" action="{{route('posts.destroy',$post->id)}}">
         @csrf
         @method('DELETE')
     </form>
-@endsection
 
-</body>
-</html>
+@endsection
