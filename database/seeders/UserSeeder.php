@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         //$admin1 = new User;
-        //$admin1->username = "Felix";
+        //$admin1->name = "Felix";
         //$admin1->email = "admin@ca1example.com";
         //$admin1->password = "secret123";
         //$admin1->save();
@@ -25,18 +25,7 @@ class UserSeeder extends Seeder
         //$admin2->password = "secret123";
         //$admin2->save();
 
-        //public function run(){
-        //    $user1 = new User
-        //    $user1->username = "sample";
-        //    $user1->email = "email";
-        //    $user1->password = "secret";
-        //}
-
-        //$user1 = new User;
-        //$user1->username = "sample";
-        //$user1->email = "email";
-        //$user1->password = "secret";
-        //$user1->save();
+        //creates 20 random users
         User::factory()->count(20)->create();
     }
 }

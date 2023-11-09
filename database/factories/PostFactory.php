@@ -17,15 +17,11 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
-            //'title' => $this->faker->unique()->sentence(4),
-            //'description' => $this->faker->text(100),
 
-
-            'title' => fake()->title(),
-            'description' => fake()->description()
-
-
-            
+            'title' => fake()->text(20),
+            'description' => fake()->text(100),
+            'user_id' => random_int(1, 20),
+            'date_created' =>fake()->date()
         ];
     }
 }

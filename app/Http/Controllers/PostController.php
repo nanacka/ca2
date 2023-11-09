@@ -12,7 +12,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('date_created')->paginate(8);
+        $posts = Post::orderBy('date_created')->paginate(10);
         return view('posts.index', [
             'posts' =>$posts,
         ]);
@@ -38,7 +38,8 @@ class PostController extends Controller
         ];
         //custom validation error messages
         $messages = [
-            'title.unique' => 'post title should be unique', //syntax: field_name.rule
+            'title.required' => 'post title is required', //syntax: field_name.rule
+            'title.min' => 'Post must be at least 2 characetrs'
         ];
 
         
@@ -50,6 +51,7 @@ class PostController extends Controller
         $post = new post;
         $post->title = $request->title;
         $post->description = $request->description;
+        $post->user_id = Auth::user()->id;
         $post->save(); // save it to the database.
         //Redirect to a specified route with flash message.
         return redirect()
@@ -90,7 +92,25 @@ class PostController extends Controller
 
     public function update(Request $request, string $id)
     {
-        
+        $rules = [
+            'title' => 'required|string|min:2|max:191',
+            'description'  => 'required|string|min:5|max:1000',
+        ];
+
+        $messages = [
+            'title.required' => 'post title is required', //syntax: field_name.rule
+            'title.min' => 'Post must be at least 2 characetrs'
+        ];
+
+        $request->validate($rules, $messages);
+        $post               = Post::findOrFail($id);
+        $post->title        = $request->title;
+        $post->description  = $request->description;
+        $post->save();
+
+        return redirect()
+            ->route('posts.show', $id)
+            ->with('status', 'Updated the selected Post! :)');
     }
 
     /**
@@ -107,4 +127,8 @@ class PostController extends Controller
             ->route('posts.index')
             ->with('status','Deleted the selected Post!');
     }
+
+    //public function __construct(){
+    //    $this->middleware('auth');
+    //}
 }
