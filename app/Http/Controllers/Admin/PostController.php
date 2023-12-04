@@ -1,22 +1,38 @@
 <?php
 
 namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Tag;
+use Auth;
 
 
 class PostController extends Controller
 {
+
+    public function __construct()
+    {
+        //would've been nice if this worked... (apparently. I couldnt tell you why <3)
+        //Auth::user()->authorizeRoles('admin');
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+
+        // if(!Auth::user()->hasRole('admin')){
+        //     return to_route('user.books.index');
+        // }
+
+
         $posts = Post::all();
 
-        return view('posts.index', [
+        return view('admin.books.index', [
             'posts' => $posts 
         ]);
     }
@@ -27,7 +43,7 @@ class PostController extends Controller
     public function create()
     {
         $tags = Tag::all();
-        return view('posts.create') ->with('tags', $tags);
+        return view('admin.posts.create') ->with('tags', $tags);
                                     
     }
 
@@ -56,7 +72,7 @@ class PostController extends Controller
 
         $post->tags()->attach($request->tags);
 
-        return to_route('posts.index');
+        return to_route('admin.posts.index');
     }
 
     /**
@@ -66,7 +82,7 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
 
-        return view('posts.show', [
+        return view('admin.posts.show', [
             'post' => $post
         ]);
     }

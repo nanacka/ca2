@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Posts') }}
+            {{ __('Home') }}
         </h2>
     </x-slot>
 
@@ -12,9 +12,8 @@
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
 
 
-                        <p><b>Title:</b> {{ $post->title }}</p>
-                        <p><b>Description:</b> {{ $post->description }}</p> 
-                        <p>there should be edit and delete buttons here</p>
+                        <p>you are an ordinary user</p>
+
                     </div>
                 </div>
             </div>
