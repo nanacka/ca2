@@ -1,45 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    
-@extends('layouts.app')
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Create Post') }}
+        </h2>
+    </x-slot>
 
-@section('content')
-    <h3 class="text-center">Create user</h3>
-    <form action="{{ route('users.store') }}" method="POST">
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="my-6 p-6 bg-white border-b border-gray-200 shadow-sm sm:rounded-lg">
+                <form action="{{ route('posts.store') }}" method="post">
+                    @csrf
+                    <x-text-input
+                        type="text"
+                        name="title"
+                        field="title"
+                        placeholder="Title"
+                        class="w-full"
+                        autocomplete="off"
+                        :value="@old('title')"></x-text-input>
 
-        @csrf
-        {{-- ^^ generates a hidden input named csrf_token for security, needed to submit form--}}
-        <div class="form-group">
-            <label for="title">user Title</label>
-            <input type="text" name="title" id="title" class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" value="{{ old('title') }}" placeholder="Enter Title">
-            @if($errors->has('title'))
-                <span class="invalid-feedback">
-                    {{ $errors->first('title') }}
-                </span>
-            @endif
+                    <textarea
+                        name="description"
+                        rows="10"
+                        field="description"
+                        placeholder="Description..."
+                        class="w-full mt-6"
+                        :value="@old('description')"></textarea>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tags"> <strong> Tags</strong> <br> </label>
+                        @foreach()
+                            <input type="checkbox", value="{{$tag->id}}" name="tags[]">
+                            <label for="">{{$tag->name}}</label>
+                        @endforeach
+
+                    </div>
+
+                    <x-primary-button class="mt-6">Save Post</x-primary-button>
+                </form>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="body">user Description</label>
-            <textarea name="body" id="body" rows="4" class="form-control {{ $errors->has('body') ? 'is-invalid' : '' }}" placeholder="Enter user Description">{{ old('body') }}</textarea>
-
-            {{--error handling--}}
-            
-            @if($errors->has('body')) {{-- <-check if we have a validation error --}}
-                <span class="invalid-feedback">
-                    {{ $errors->first('body') }} {{-- <- Display the First validation error --}}
-                </span>
-            @endif
-        </div>
-        <button type="submit" class="btn btn-primary">Create</button>
-    </form>
-@endsection
-
-</body>
-</html>
+    </div>
+</x-app-layout>

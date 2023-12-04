@@ -13,8 +13,13 @@ return new class extends Migration
     {
         Schema::create('tags_posts', function (Blueprint $table) {
             $table->id();
-           //$table->string('tag_id');
-           //$table->string();
+            $table->label();
+            $table->foreignId('tag_ig');
+            $table->foreignId('post_ig');
+            $table->foreign('tag_id')->references('id')->on('authors')->onUpdate('cascade')->onDelete('restrict');
+            $table->foreign('post_id')->references('id')->on('books')->onUpdate('cascade')->onDelete('restrict');
+
+            $table->timestamps();
         });
     }
 

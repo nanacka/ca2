@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\Tag;
+
 
 class PostController extends Controller
 {
@@ -12,9 +14,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('date_created')->paginate(10);
+        $posts = Post::all();
+
         return view('posts.index', [
-            'posts' =>$posts,
+            'posts' => $posts 
         ]);
     }
 
@@ -23,112 +26,72 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        $tags = Tag::all();
+        return view('posts.create') ->with('tags', $tags);
+                                    
     }
 
-
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
-        //validation rules
-    
-        //    THIS ONE FOR UNIQUE JUST IN CASE   'title' => 'required|string|unique:posts,title|min:2|max:191', 
-        $rules = [
-            'title' => 'required|string|min:2|max:191',
-            'description'  => 'required|string|min:5|max:1000',
-        ];
-        //custom validation error messages
-        $messages = [
-            'title.required' => 'post title is required', //syntax: field_name.rule
-            'title.min' => 'Post must be at least 2 characetrs'
-        ];
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required|max:500',
+            'tag_id' =>'required',
+            'post_image' => 'file|image|dimensions:width=300,height=400',
+            //'post_image' => 'file|image',
+            'user_id' => 'required',
+            'tags' =>['required' , 'exists:tags,id']
+        ]);
 
-        
-        //First Validate the form data
+        $post = Post::create([
+            'title' => $request->title,
+            'description' => $request->description,
+         //   'post_image' => $filename,
+        //    'tag' => $request->tag,
+        //    'user' => $user->tag,
+        ]);
 
-        //request object as parameter used to access form data
-        $request->validate($rules,$messages);
-        //Create a post
-        $post = new post;
-        $post->title = $request->title;
-        $post->description = $request->description;
-        $post->user_id = Auth::user()->id;
-        $post->save(); // save it to the database.
-        //Redirect to a specified route with flash message.
-        return redirect()
-            ->route('posts.index')
-            ->with('status','Created a new post!');
+        $post->tags()->attach($request->tags);
+
+        return to_route('posts.index');
     }
 
     /**
      * Display the specified resource.
      */
-
-
-    public function show($id)
+    public function show(string $id)
     {
         $post = Post::findOrFail($id);
-            return view('posts.show', [
-                'post' =>$post,
-            ]);
+
+        return view('posts.show', [
+            'post' => $post
+        ]);
     }
-//
+
     /**
      * Show the form for editing the specified resource.
      */
-
-
-    public function edit($id)
+    public function edit(string $id)
     {
-        $post = Post::findOrFail($id);
-        return view('posts.edit',[
-            'post' => $post,
-        ]);
+        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-
-
     public function update(Request $request, string $id)
     {
-        $rules = [
-            'title' => 'required|string|min:2|max:191',
-            'description'  => 'required|string|min:5|max:1000',
-        ];
-
-        $messages = [
-            'title.required' => 'post title is required', //syntax: field_name.rule
-            'title.min' => 'Post must be at least 2 characetrs'
-        ];
-
-        $request->validate($rules, $messages);
-        $post               = Post::findOrFail($id);
-        $post->title        = $request->title;
-        $post->description  = $request->description;
-        $post->save();
-
-        return redirect()
-            ->route('posts.show', $id)
-            ->with('status', 'Updated the selected Post! :)');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      */
-
-
-    public function destroy($id)
+    public function destroy(string $id)
     {
-        $post = Post::findOrFail($id);
-        $post->delete();
-
-        return redirect()
-            ->route('posts.index')
-            ->with('status','Deleted the selected Post!');
+        //
     }
-
-    //public function __construct(){
-    //    $this->middleware('auth');
-    //}
 }

@@ -3,6 +3,10 @@
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ImagesUploadController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TagController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +28,9 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+
+    
+    Route::get('/tags', [TagController::class, 'index'])->name('posts.index');
 
     Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
     Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
