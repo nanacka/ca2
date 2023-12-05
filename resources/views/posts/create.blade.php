@@ -7,7 +7,7 @@
 
     <x-slot name="slot">
         <h3 class="text-center">Create post</h3>
-        <form action="{{ route('admin.posts.store') }}" method="post">
+        <form action="{{ route('posts.store') }}" method="post">
     
             @csrf
             {{-- ^^ generates a hidden input named csrf_token for security, needed to submit form--}}
@@ -32,7 +32,16 @@
                     </span>
                 @endif
             </div>
-            <button type="submit" class="btn btn-primary">Create</button>
+
+        <x-file-input 
+            type="file"
+            name="book_image"
+            placeholder="w-full mt-6"
+            firld="book_image"
+            >   
+        </x-file-input>
+
+        <x-primary-button class="mt-6">Save Book</x-primary-button>
         </form>
     </x-slot>
 

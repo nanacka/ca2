@@ -35,20 +35,31 @@ Route::middleware('auth')->group(function () {
     //Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
     Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
     Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
-    Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show');
-    Route::get('/posts/{id}/edit', [PostController::class, 'edit'])->name('posts.edit');
-    Route::put('/posts/{id}', [PostController::class, 'update'])->name('posts.update');
-    Route::delete('/posts/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
+
+    //Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show');
+    //Route::get('/posts/{id}/edit', [PostController::class, 'edit'])->name('posts.edit');
+    //Route::put('/posts/{id}', [PostController::class, 'update'])->name('posts.update');
+    //Route::delete('/posts/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
+
+    // Route::get('/posts/{id}',       [AdminPostController::class, 'show'])->name('posts.show');
+    // Route::get('/posts/{id}/edit',  [AdminPostController::class, 'edit'])->name('posts.edit');
+    // Route::put('/posts/{id}',       [AdminPostController::class, 'update'])->name('posts.update');
+    // Route::delete('/posts/{id}',    [AdminPostController::class, 'destroy'])->name('posts.destroy');
+
+    // Route::get('/posts/{id}',       [UserPostController::class, 'show'])->name('posts.show');
+    // Route::get('/posts/{id}/edit',  [UserPostController::class, 'edit'])->name('posts.edit');
+    // Route::put('/posts/{id}',       [UserPostController::class, 'update'])->name('posts.update');
+    // Route::delete('/posts/{id}',    [UserPostController::class, 'destroy'])->name('posts.destroy');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy'); 
     Route::get('/home', [HomeController::class, 'index'])->name('home.index');
 
-    Route::resource('posts', UserPostController::class)
+    Route::resource('/posts', UserPostController::class)
         ->middleware(['auth', 'role:user'])
         ->names('user.posts')
-        ->only(['index','show', 'create']);
+        ;
 
     Route::resource('admin/posts', AdminPostController::class)->middleware(['auth', 'role:admin'])->names('admin.posts');
 

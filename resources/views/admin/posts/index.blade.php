@@ -32,4 +32,3 @@
 
     @endsection
 
-</x-app-layout>

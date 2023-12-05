@@ -11,10 +11,11 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
 
-
+                        <img width="150" src="{{ asset("storage/images/ . $post->post_image") }}" alt="">
                         <p><b>Title:</b> {{ $post->title }}</p>
                         <p><b>Description:</b> {{ $post->description }}</p> 
                         <p>there should be edit and delete buttons here</p>
+                        
                     </div>
                 </div>
             </div>

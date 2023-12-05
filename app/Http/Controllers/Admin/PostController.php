@@ -63,12 +63,24 @@ class PostController extends Controller
             'tags' =>['required' , 'exists:tags,id']
         ]);
 
+        $book_image = $request->file('book_image');
+        $extension = $book_image->getClientOriginalExtension();
+        
+        //name the file to the date, the og filename, and the "extension" e.g. jpeg or png etc
+        
+        $filename = date('Y-m-d-His') . '_' . $request->title . '.' . $extension;
+        // dd($book_image);
+        
+        //storing the image:
+        
+        $book_image->storeAs('public/images', $filename);
+
         $post = Post::create([
             'title' => $request->title,
             'description' => $request->description,
             'post_image' => $filename,
         //    'tag' => $request->tag,
-        //    'user' => $user->tag,
+        //    'user' => $request->user,
         ]);
 
         $post->tags()->attach($request->tags);
