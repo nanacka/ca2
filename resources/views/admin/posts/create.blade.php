@@ -1,15 +1,13 @@
-
-
 <x-app-layout>
-    <x-slot name="header">
+    @section('header')
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Create post') }}
         </h2>
-    </x-slot>
+    @endsection
 
     <x-slot name="slot">
         <h3 class="text-center">Create post</h3>
-        <form action="{{ route('admin.posts.store') }}" method="post">
+        <form action="{{ route('posts.store') }}" method="post">
     
             @csrf
             {{-- ^^ generates a hidden input named csrf_token for security, needed to submit form--}}

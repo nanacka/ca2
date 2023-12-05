@@ -34,13 +34,9 @@ class PostSeeder extends Seeder
 
         // Post::factory()->time(50)->create();
 
-        $numOfTag = 3;
-        User::factory()->times(3)->create();
+        //$numOfTag = 3;
+        Post::factory()->times(10)->create();
 
 
-        foreach(Post::all() as $post){
-            $tag = User::inRandomOrder()->take(rand(1,3))->pluck('id');
-            $post->tag()->attach($tag);
-        }
     }
 }

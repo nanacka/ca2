@@ -1,13 +1,14 @@
 
-
-<x-app-layout>
-    <x-slot name="header">
+@extends('layouts.admin')
+    @section('header')
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Posts') }}
         </h2>
-    </x-slot>
+    @endsection
 
-    <x-slot name="slot">
+
+    @section('content')
+
         <ul class="list-group py-3 mb-3">
 
             @forelse($posts as $post)
@@ -16,7 +17,7 @@
                     <h5 class="text-xl">{{ $post->title }}</h5>
                     <p>{{ Str::limit($post->description,10) }}</p>
                     <small class="float-right">{{ $post->date_created }}</small>
-                    <a href="{{route('posts.show',$post->id)}}" class="text-slate-500">Read More</a>
+                    <a href="{{route('user.posts.show',$post->id)}}" class="text-slate-500">Read More</a>
                 </li>
 
             @empty
@@ -24,10 +25,11 @@
             @endforelse
             
         </ul>
-        <div class="d-flex justify-content-center">
-            {{ $posts->links() }}
-        </div>
-    </x-slot>
+        {{-- <div class="d-flex justify-content-center"> --}}
+            {{-- {{ $posts->links() }} --}}
+        {{-- </div> --}}
+        {{-- gotta paginate in controller --}}
 
-    
+    @endsection
+
 </x-app-layout>

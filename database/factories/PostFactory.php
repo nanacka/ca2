@@ -20,8 +20,28 @@ class PostFactory extends Factory
 
             'title' => fake()->text(20),
             'description' => fake()->text(100),
-            'user_id' => random_int(1, 20),
+            'user_id' => 1,
             'date_created' =>fake()->date()
+
+            // 'title' => fake()->text(20),
+            // 'description' => fake()->text(100),
+            // 'user_id' => 2,
+            // 'date_created' =>fake()->date()
+            
+            // 'title' => fake()->text(20),
+            // 'description' => fake()->text(100),
+            // 'user_id' => 3,
+            // 'date_created' =>fake()->date()
+
+            // 'title' => fake()->text(20),
+            // 'description' => fake()->text(100),
+            // 'user_id' => 4,
+            // 'date_created' =>fake()->date()
+
+            // 'title' => fake()->text(20),
+            // 'description' => fake()->text(100),
+            // 'user_id' => 5,
+            // 'date_created' =>fake()->date()
         ];
     }
 }

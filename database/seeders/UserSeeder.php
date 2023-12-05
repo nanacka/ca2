@@ -17,6 +17,14 @@ class UserSeeder extends Seeder
 
         $role_admin = Role::where('name','admin')->first();
         $role_user = Role::where('name','user')->first();
+
+        $admin = new User;
+        $admin->name = "Mo Che";
+        $admin->email = "admin@ca1example.com";
+        $admin->password = "secret123";
+        $admin->save();
+
+        $admin->roles()->attach($role_admin);
         
         $user = new User;
         $user->name = "Guy";

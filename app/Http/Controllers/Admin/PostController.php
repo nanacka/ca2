@@ -1,6 +1,5 @@
 <?php
 
-namespace App\Http\Controllers;
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
@@ -26,13 +25,15 @@ class PostController extends Controller
     {
 
         // if(!Auth::user()->hasRole('admin')){
-        //     return to_route('user.books.index');
+        //     return to_route('user.posts.index');
         // }
+
+        Auth::user()->authorizeRoles('admin');
 
 
         $posts = Post::all();
 
-        return view('admin.books.index', [
+        return view('admin.posts.index', [
             'posts' => $posts 
         ]);
     }
@@ -57,7 +58,7 @@ class PostController extends Controller
             'description' => 'required|max:500',
             'tag_id' =>'required',
             'post_image' => 'file|image|dimensions:width=300,height=400',
-            //'post_image' => 'file|image',
+            'post_image' => 'file|image',
             'user_id' => 'required',
             'tags' =>['required' , 'exists:tags,id']
         ]);
@@ -65,7 +66,7 @@ class PostController extends Controller
         $post = Post::create([
             'title' => $request->title,
             'description' => $request->description,
-         //   'post_image' => $filename,
+            'post_image' => $filename,
         //    'tag' => $request->tag,
         //    'user' => $user->tag,
         ]);

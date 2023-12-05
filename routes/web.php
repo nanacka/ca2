@@ -5,8 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Admin\BookController as AdminBookController;
-use App\Http\Controllers\User\BookController as UserBookController;
+use App\Http\Controllers\DashboardController;
+
+use App\Http\Controllers\Admin\PostController as AdminPostController;
+use App\Http\Controllers\User\PostController as UserPostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,17 +25,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::middleware('auth')->group(function () {
 
     
-
-
     //Route::get('/tags', [TagController::class, 'index'])->name('posts.index');
-
     //Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
     Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
     Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
@@ -44,26 +42,27 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy'); 
     Route::get('/home', [HomeController::class, 'index'])->name('home.index');
 
-    Route::resource('post', UserBookController::class)
+    Route::resource('posts', UserPostController::class)
         ->middleware(['auth', 'role:user'])
-        ->names('user.post')
-        ->only(['index','show']);
+        ->names('user.posts')
+        ->only(['index','show', 'create']);
 
-    Route::resource('admin/post', AdminBookController::class)->middleware(['auth', 'role:admin'])->names('admin.post');
+    Route::resource('admin/posts', AdminPostController::class)->middleware(['auth', 'role:admin'])->names('admin.posts');
+
+
     
     //For adding an image
-    Route::get('/add-image',[ImageUploadController::class,'addImage'])->name('images.add');
+    //Route::get('/add-image',[ImageUploadController::class,'addImage'])->name('images.add');
     
     //For storing an image
-    Route::post('/store-image',[ImageUploadController::class,'storeImage'])
-    ->name('images.store');
+    //Route::post('/store-image',[ImageUploadController::class,'storeImage'])
+    //->name('images.store');
     
     //For showing an image
-    Route::get('/view-image',[ImageUploadController::class,'viewImage'])->name('images.view');
+    //Route::get('/view-image',[ImageUploadController::class,'viewImage'])->name('images.view');
 });
 
 require __DIR__.'/auth.php';

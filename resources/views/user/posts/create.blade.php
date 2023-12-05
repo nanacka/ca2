@@ -1,5 +1,3 @@
-
-
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -9,7 +7,7 @@
 
     <x-slot name="slot">
         <h3 class="text-center">Create post</h3>
-        <form action="{{ route('posts.store') }}" method="post">
+        <form enctype="multipart/form-data" action="{{ route('user.posts.store') }}" method="post">
     
             @csrf
             {{-- ^^ generates a hidden input named csrf_token for security, needed to submit form--}}

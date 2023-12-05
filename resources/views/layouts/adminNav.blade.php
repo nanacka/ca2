@@ -15,22 +15,13 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('user.posts.index')" :active="request()->routeIs('user.posts.index')">
+                    <x-nav-link :href="route('admin.posts.index')" :active="request()->routeIs('admin.posts')">
                         {{ __('Posts') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('user.posts.create')" :active="request()->routeIs('user.posts')">
+                    <x-nav-link :href="route('admin.posts.create')" :active="request()->routeIs('admin.posts')">
                         {{ __('Create Post') }}
                     </x-nav-link>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-
-                </div>
-                {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('user.posts.create')" :active="request()->routeIs('user.posts.c')">
-                        {{ __('Create Post') }}
-                    </x-nav-link>
-                 </div> --}}
-                
             </div>
 
             <!-- Settings Dropdown -->
@@ -41,7 +32,7 @@
                             @if(Auth::check())
                                 <div>{{ Auth::user()->name }}</div>
                             @endif
-
+                            
                             <div class="ml-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                     <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -89,7 +80,6 @@
             </x-responsive-nav-link>
         </div>
 
-
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
             <div class="px-4">
@@ -116,4 +106,3 @@
         </div>
     </div>
 </nav>
-
