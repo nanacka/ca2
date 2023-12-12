@@ -41,21 +41,21 @@
                             </span>
                         @endif
 
-                    <div class="form-group">
-                        <label for="tags"> <strong> Tags</strong> <br> </label>
-                            @foreach($tags as $tag)
-                                <input id="{{$tag->id}}" type="checkbox" value="{{$tag->id}}" name="tags[]">
-                                <label for="{{$tag->id}}">{{$tag->name}}</label>
-                                <br>
-                            @endforeach
-
-                    </div>
-
-                    @if($errors->has('tags')) {{-- <-check if we have a validation error --}}
-                        <span class="invalid-feedback">
-                            {{ $errors->first('tags') }} {{-- <- Display the First validation error --}}
-                        </span>
-                    @endif
+                        <div class="form-group">
+                            <label for="tags"> <strong> Tags</strong> <br> </label>
+                                @foreach($tags as $tag)
+                                    <input id="{{$tag->id}}" type="checkbox" value="{{$tag->id}}" name="tags[]">
+                                    <label for="{{$tag->id}}">{{$tag->name}}</label>
+                                    <br>
+                                @endforeach
+    
+                        </div>
+    
+                        @if($errors->has('tags')) {{-- <-check if we have a validation error --}}
+                            <span class="invalid-feedback">
+                                {{ $errors->first('tags') }} {{-- <- Display the First validation error --}}
+                            </span>
+                        @endif
 {{-- 
                     <input
                         type="file"

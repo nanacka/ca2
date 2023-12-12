@@ -16,7 +16,10 @@ class Post extends Model
         // 'post_image'
     ];
 
-    public function tags(){
+    public function posts(){
         return $this->belongsToMany(Tag::class);
+        return $this->hasOne(User::class);
     }
+
+
 }

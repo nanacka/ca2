@@ -56,31 +56,32 @@ class PostController extends Controller
             'title' => 'required',
             'description' => 'required|max:500',
             'tag_id' =>'required',
+            'tags' =>['required' , 'exists:tags,id']
             // 'post_image' => 'file|image|dimensions:width=300,height=400',
             // 'post_image' => 'file|image',
-            // 'user_id' => 'required',
-            'tags' =>['required' , 'exists:tags,id']
         ]);
 
-        // $book_image = $request->file('book_image');
-        // $extension = $book_image->getClientOriginalExtension();
+        // $post_image = $request->file('post_image');
+        // $extension = $post_image->getClientOriginalExtension();
         
         //name the file to the date, the og filename, and the "extension" e.g. jpeg or png etc
         
-        $filename = date('Y-m-d-His') . '_' . $request->title . '.' . $extension;
-        // dd($book_image);
+        // $filename = date('Y-m-d-His') . '_' . $request->title . '.' . $extension;
+        // dd($post_image);
         
         //storing the image:
         
-        // $book_image->storeAs('public/images', $filename);
+        // $post_image->storeAs('public/images', $filename);
 
         $post = Post::create([
             'title' => $request->title,
             'description' => $request->description,
             // 'post_image' => $filename,
-            // 'tag' => $request->tag,
-            'user_id' => Auth::user()->id
+            'tag' => $request->tag,
+            'user_id' => Auth::user()->id 
         ]);
+
+        // $post->user()->attach($request->user);
 
         $post->tags()->attach($request->tags);
 
