@@ -44,7 +44,8 @@ class PostController extends Controller
     public function create()
     {
         $tags = Tag::all();
-        return view('admin.posts.create') ->with('tags', $tags);                        
+        // $user = Auth::user()->id;
+        return view('admin.posts.create')->with('tags', $tags);                        
     }
 
     /**
@@ -55,7 +56,7 @@ class PostController extends Controller
         $request->validate([
             'title' => 'required',
             'description' => 'required|max:500',
-            'tag_id' =>'required',
+            // 'tag_id' =>'required',
             'tags' =>['required' , 'exists:tags,id']
             // 'post_image' => 'file|image|dimensions:width=300,height=400',
             // 'post_image' => 'file|image',
@@ -73,17 +74,19 @@ class PostController extends Controller
         
         // $post_image->storeAs('public/images', $filename);
 
+
         $post = Post::create([
             'title' => $request->title,
             'description' => $request->description,
             // 'post_image' => $filename,
             'tag' => $request->tag,
-            'user_id' => Auth::user()->id 
+            'user_id' => Auth::id()
         ]);
 
         // $post->user()->attach($request->user);
 
         $post->tags()->attach($request->tags);
+        // $post->user()->attach($request->Auth::user()->id);
 
         return to_route('admin.posts.index');
     }

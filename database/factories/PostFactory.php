@@ -21,7 +21,7 @@ class PostFactory extends Factory
             'title' => fake()->text(20),
             'description' => fake()->text(100),
             'user_id' => 1,
-            'date_created' =>fake()->date()
+            // 'date_created' =>fake()->date()
 
             // 'title' => fake()->text(20),
             // 'description' => fake()->text(100),

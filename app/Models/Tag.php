@@ -10,7 +10,7 @@ class Tag extends Model
     use HasFactory;
 
     public function posts(){
-        return $this->belongsToMany(Book::class);
+        return $this->belongsToMany(Post::class);
     }
 }
 
