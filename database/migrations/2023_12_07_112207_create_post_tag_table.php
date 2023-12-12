@@ -17,8 +17,11 @@ return new class extends Migration
             // $table->foreignId('post_id');
             // $table->foreign('tag_id')->references('id')->on('tags')->onUpdate('cascade')->onDelete('cascade');
             // $table->foreign('post_id')->references('id')->on('posts')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('tag_id')->constrained()->cascadeOnDelete();   
-            $table->foreignId('post_id')->constrained()->cascadeOnDelete();   
+            $table->foreignId('tag_id')->constrained()->onDelete('cascade'); 
+            $table->foreignId('post_id')->constrained()->onDelete('cascade'); 
+
+            // $table->foreignId('tag_id')->constrained()->cascadeOnDelete();   
+            // $table->foreignId('post_id')->constrained()->cascadeOnDelete();  
 
             $table->timestamps();
         });
