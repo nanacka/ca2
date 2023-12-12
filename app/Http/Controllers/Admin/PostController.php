@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-use App\Http\Controllers\Controller;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Tag;
@@ -44,8 +44,7 @@ class PostController extends Controller
     public function create()
     {
         $tags = Tag::all();
-        return view('admin.posts.create') ->with('tags', $tags);
-                                    
+        return view('admin.posts.create') ->with('tags', $tags);                        
     }
 
     /**
@@ -57,14 +56,14 @@ class PostController extends Controller
             'title' => 'required',
             'description' => 'required|max:500',
             'tag_id' =>'required',
-            'post_image' => 'file|image|dimensions:width=300,height=400',
-            'post_image' => 'file|image',
-            'user_id' => 'required',
+            // 'post_image' => 'file|image|dimensions:width=300,height=400',
+            // 'post_image' => 'file|image',
+            // 'user_id' => 'required',
             'tags' =>['required' , 'exists:tags,id']
         ]);
 
-        $book_image = $request->file('book_image');
-        $extension = $book_image->getClientOriginalExtension();
+        // $book_image = $request->file('book_image');
+        // $extension = $book_image->getClientOriginalExtension();
         
         //name the file to the date, the og filename, and the "extension" e.g. jpeg or png etc
         
@@ -73,14 +72,14 @@ class PostController extends Controller
         
         //storing the image:
         
-        $book_image->storeAs('public/images', $filename);
+        // $book_image->storeAs('public/images', $filename);
 
         $post = Post::create([
             'title' => $request->title,
             'description' => $request->description,
-            'post_image' => $filename,
-        //    'tag' => $request->tag,
-        //    'user' => $request->user,
+            // 'post_image' => $filename,
+            // 'tag' => $request->tag,
+            'user_id' => Auth::user()->id
         ]);
 
         $post->tags()->attach($request->tags);

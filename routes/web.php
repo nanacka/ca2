@@ -33,8 +33,9 @@ Route::middleware('auth')->group(function () {
     
     //Route::get('/tags', [TagController::class, 'index'])->name('posts.index');
     //Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
-    Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
-    Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
+
+    //Route::get('/posts/create', [AdminPostController::class, 'create'])->name('posts.create');
+    //Route::post('/posts', [AdminPostController::class, 'store'])->name('admin.posts.store');
 
     //Route::get('/posts/{id}', [PostController::class, 'show'])->name('posts.show');
     //Route::get('/posts/{id}/edit', [PostController::class, 'edit'])->name('posts.edit');
@@ -54,17 +55,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy'); 
+
     Route::get('/home', [HomeController::class, 'index'])->name('home.index');
 
     Route::resource('/posts', UserPostController::class)
         ->middleware(['auth', 'role:user'])
-        ->names('user.posts')
-        ;
+        ->names('user.posts');
 
-    Route::resource('admin/posts', AdminPostController::class)->middleware(['auth', 'role:admin'])->names('admin.posts');
-
-
-    
+    Route::resource('admin/posts', AdminPostController::class)
+        ->middleware(['auth', 'role:admin'])
+        ->names('admin.posts');
+  
     //For adding an image
     //Route::get('/add-image',[ImageUploadController::class,'addImage'])->name('images.add');
     

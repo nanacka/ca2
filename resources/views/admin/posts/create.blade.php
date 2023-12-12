@@ -1,40 +1,74 @@
-<x-app-layout>
+@extends('layouts.admin')
+
     @section('header')
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Create post') }}
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Create Post ADMIN LAYOUT') }}
         </h2>
     @endsection
 
-    <x-slot name="slot">
-        <h3 class="text-center">Create post</h3>
-        <form action="{{ route('admin.posts.store') }}" method="post">
-    
-            @csrf
-            {{-- ^^ generates a hidden input named csrf_token for security, needed to submit form--}}
-            <div class="form-group">
-                <label for="title">post Title</label>
-                <input type="text" name="title" id="title" class="form-control {{ $errors->has('title') ? 'is-invalid' : '' }}" value="{{ old('title') }}" placeholder="Enter Title">
-                @if($errors->has('title'))
-                    <span class="invalid-feedback">
-                        {{ $errors->first('title') }}
-                    </span>
-                @endif
-            </div>
-            <div class="form-group">
-                <label for="description">post Description</label>
-                <textarea name="description" id="description" rows="4" class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" placeholder="Enter post Description">{{ old('description') }}</textarea>
-    
-                {{--error handling--}}
-                
-                @if($errors->has('description')) {{-- <-check if we have a validation error --}}
-                    <span class="invalid-feedback">
-                        {{ $errors->first('description') }} {{-- <- Display the First validation error --}}
-                    </span>
-                @endif
-            </div>
-            <button type="submit" class="btn btn-primary">Create</button>
-        </form>
-    </x-slot>
+    @section('content')
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="my-6 p-6 bg-white border-b border-gray-200 shadow-sm sm:rounded-lg">
+                <form enctype="multipart/form-data" action="{{ route('admin.posts.store') }}" method="post">
+                    @csrf
+                    <x-text-input
+                        type="text"
+                        name="title"
+                        field="title"
+                        placeholder="Title"
+                        class="w-full"
+                        autocomplete="off"
+                        :value="@old('title')"></x-text-input>
 
-    
-</x-app-layout>
+                        @if($errors->has('title')) {{-- <-check if we have a validation error --}}
+                            <span class="invalid-feedback">
+                                {{ $errors->first('title') }} {{-- <- Display the First validation error --}}
+                            </span>
+                        @endif
+
+                    <textarea
+                        name="description"
+                        rows="10"
+                        field="description"
+                        placeholder="Description..."
+                        class="w-full mt-6"
+                        :value="@old('description')"></textarea>
+                        
+                        @if($errors->has('description')) {{-- <-check if we have a validation error --}}
+                            <span class="invalid-feedback">
+                                {{ $errors->first('description') }} {{-- <- Display the First validation error --}}
+                            </span>
+                        @endif
+
+                    <div class="form-group">
+                        <label for="tags"> <strong> Tags</strong> <br> </label>
+                            @foreach($tags as $tag)
+                                <input id="{{$tag->id}}" type="checkbox" value="{{$tag->id}}" name="tags[]">
+                                <label for="{{$tag->id}}">{{$tag->name}}</label>
+                                <br>
+                            @endforeach
+
+                    </div>
+
+                    @if($errors->has('tags')) {{-- <-check if we have a validation error --}}
+                        <span class="invalid-feedback">
+                            {{ $errors->first('tags') }} {{-- <- Display the First validation error --}}
+                        </span>
+                    @endif
+{{-- 
+                    <input
+                        type="file"
+                        name="post_image"
+                        placeholder="Post image"
+                        class="w-full mt-6"
+                        field="post_image"
+                    /> --}}
+
+
+                    <x-primary-button class="mt-6">Save Post</x-primary-button>
+                </form>
+            </div>
+        </div>
+    </div>
+    @endsection

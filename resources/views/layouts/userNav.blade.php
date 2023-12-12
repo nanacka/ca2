@@ -18,9 +18,9 @@
                     <x-nav-link :href="route('user.posts.index')" :active="request()->routeIs('user.posts')">
                         {{ __('Posts') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('user.posts.create')" :active="request()->routeIs('user.posts')">
+                    {{-- <x-nav-link :href="route('user.posts.create')" :active="request()->routeIs('user.posts')">
                         {{ __('Create Post') }}
-                    </x-nav-link>
+                    </x-nav-link> --}}
                 </div>
             </div>
 

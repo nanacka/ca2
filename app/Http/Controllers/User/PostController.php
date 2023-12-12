@@ -72,8 +72,8 @@ class PostController extends Controller
             'title' => $request->title,
             'description' => $request->description,
             'post_image' => $filename,
-        //    'tag' => $request->tag,
-        //    'user' => $request->user,
+            'tag' => $request->tag,
+            'user' => $request->user,
         ]);
 
         $post->tags()->attach($request->tags);
