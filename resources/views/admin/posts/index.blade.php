@@ -2,7 +2,7 @@
 @extends('layouts.admin')
     @section('header')
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Posts') }}
+            {{ __('Admin Viewing Posts') }}
         </h2>
     @endsection
 
@@ -17,8 +17,9 @@
                     <h5 class="text-xl">{{ $post->title }}</h5>
                     <p>{{ Str::limit($post->description,10) }}</p>
                     <small class="float-right">{{ $post->date_created }}</small>
-                    <a href="{{route('user.posts.show',$post->id)}}" class="text-slate-500">Read More</a>
+                    <a href="{{route('admin.posts.show',$post->id)}}" class="text-slate-500">Read More</a>
                 </li>
+                
 
             @empty
                 <h4 class="text-center">No posts Found!</h4>

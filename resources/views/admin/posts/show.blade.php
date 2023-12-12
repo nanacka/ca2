@@ -11,10 +11,17 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
 
-                        <img width="150" src="{{ asset("storage/images/ . $post->post_image") }}" alt="">
+                        <img width="150" src={{ asset("storage/images/" . $post->post_image) }} alt="" />
                         <p><b>Title:</b> {{ $post->title }}</p>
                         <p><b>Description:</b> {{ $post->description }}</p> 
                         <p>there should be edit and delete buttons here</p>
+
+                        <form method="POST" action="{{ route('admin.posts.destroy', $post->id) }}">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">Delete</button>
+                        </form>
+
                         
                     </div>
                 </div>

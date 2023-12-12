@@ -62,23 +62,22 @@ class PostController extends Controller
             // 'post_image' => 'file|image',
         ]);
 
-        // $post_image = $request->file('post_image');
-        // $extension = $post_image->getClientOriginalExtension();
+        $post_image = $request->file('post_image');
+        $extension = $post_image->getClientOriginalExtension();
         
         //name the file to the date, the og filename, and the "extension" e.g. jpeg or png etc
         
-        // $filename = date('Y-m-d-His') . '_' . $request->title . '.' . $extension;
+        $filename = date('Y-m-d-His') . '_' .  str_replace(' ', '_', $request->title) . '.' . $extension;
         // dd($post_image);
         
-        //storing the image:
-        
-        // $post_image->storeAs('public/images', $filename);
+        //storing the image:        
+        $post_image->storeAs('public/images', $filename);
 
 
         $post = Post::create([
             'title' => $request->title,
             'description' => $request->description,
-            // 'post_image' => $filename,
+            'post_image' => $filename,
             'tag' => $request->tag,
             'user_id' => Auth::id()
         ]);
@@ -124,6 +123,8 @@ class PostController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $post = Post::findOrFail($id);
+        $post->delete();
+        return redirect()->route('admin.posts.index')->with('status', 'deleted post');
     }
 }

@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->foreignId('user_id')->references('id')->on('users');
+            // $table->foreignId('user_id');
+            // $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('restrict');         
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();                  
             $table->timestamps();
         });
     }

@@ -56,14 +56,14 @@
                                 {{ $errors->first('tags') }} {{-- <- Display the First validation error --}}
                             </span>
                         @endif
-{{-- 
+
                     <input
                         type="file"
                         name="post_image"
                         placeholder="Post image"
                         class="w-full mt-6"
                         field="post_image"
-                    /> --}}
+                    />
 
 
                     <x-primary-button class="mt-6">Save Post</x-primary-button>
