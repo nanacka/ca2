@@ -25,9 +25,15 @@ class PostController extends Controller
         
         $post = Post::findOrFail($id);
 
+        //need to get all of the comments where the post id matches the id here
+        //get all comments where id = id up there
+        $comments = Comment::all();
+        // $comments = Comment::findOrFail($comments->post_id);
+
+
         return view('user.posts.show', [
             'post' => $post
-        ]);
+        ])->with('comments', $comments);
         
     }
 

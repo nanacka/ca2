@@ -15,6 +15,10 @@
                         <p><b>Title:</b> {{ $post->title }}</p>
                         <p><b>Description:</b> {{ $post->description }}</p> 
                         <p>there should be edit and delete buttons here</p>
+
+                        <p>comments</p>
+                        <p>{{$comment->content}}</p>
+
                     </div>
                 </div>
             </div>

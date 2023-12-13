@@ -60,11 +60,16 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('/posts', UserPostController::class)
         ->middleware(['auth', 'role:user'])
-        ->names('user.posts');
+        ->names('user.posts')
+        ->only('index', 'show');
 
     Route::resource('admin/posts', AdminPostController::class)
         ->middleware(['auth', 'role:admin'])
         ->names('admin.posts');
+
+    Route::resource('/comments', CommentController::class)
+        ->middleware('auth')
+        ->names('comments');
   
     //For adding an image
     //Route::get('/add-image',[ImageUploadController::class,'addImage'])->name('images.add');

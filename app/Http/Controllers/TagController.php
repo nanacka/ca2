@@ -16,7 +16,7 @@ class TagController extends Controller
         $tags = Tag::all();
 
         return view('tags.index', [
-            'tags' => $authors 
+            'tags' => $tags 
         ]);
     }
 
