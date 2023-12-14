@@ -14,6 +14,7 @@
             @forelse($posts as $post)
 
                 <li class="list-group-item mx-5 my-5">
+                    <img width="150" src={{ asset("public/images/" . $post->post_image) }} alt="" />
                     <h5 class="text-xl">{{ $post->title }}</h5>
                     <p>{{ Str::limit($post->description,10) }}</p>
                     <small class="float-right">{{ $post->date_created }}</small>

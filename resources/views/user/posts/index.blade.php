@@ -21,18 +21,6 @@
                 <h4 class="text-center">No posts Found!</h4>
             @endforelse
 
-            
-            @forelse($comments as $comment)
-
-                <li class="list-group-item mx-5 my-5">
-                    <h5 class="text-xl">{{ $comment->content }}</h5>
-                    <small class="float-right">{{ $post->date_created }}</small>
-                    <a href="{{route('user.posts.show',$post->id)}}" class="text-slate-500">Read More</a>
-                </li>
-
-            @empty
-                <h4 class="text-center">No posts Found!</h4>
-            @endforelse
 
             
         </ul>

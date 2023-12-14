@@ -21,6 +21,8 @@
                     {{-- <x-nav-link :href="route('user.posts.create')" :active="request()->routeIs('user.posts')">
                         {{ __('Create Post') }}
                     </x-nav-link> --}}
+
+                    {{-- sorry i was gonna have users create posts and then i reread the ca lol --}}
                 </div>
             </div>
 

@@ -24,5 +24,15 @@ class Post extends Model
     public function user(){
         return $this->hasOne(User::class);
     }
+    
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
+
+    // public function hasComments($role){
+    //     return null !== $this->roles()->where('name', $role)->first();
+    // }
+
+    
 
 }
