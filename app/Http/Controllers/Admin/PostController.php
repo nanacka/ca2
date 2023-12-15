@@ -23,13 +23,11 @@ class PostController extends Controller
      */
     public function index()
     {
-
         // if(!Auth::user()->hasRole('admin')){
         //     return to_route('user.posts.index');
         // }
 
         Auth::user()->authorizeRoles('admin');
-
 
         $posts = Post::all();
 
@@ -57,9 +55,9 @@ class PostController extends Controller
             'title' => 'required',
             'description' => 'required|max:500',
             // 'tag_id' =>'required',
-            'tags' =>['required' , 'exists:tags,id']
+            'tags' =>['required' , 'exists:tags,id'],
             // 'post_image' => 'file|image|dimensions:width=300,height=400',
-            // 'post_image' => 'file|image',
+            'post_image' => 'file|image'
         ]);
 
         $post_image = $request->file('post_image');
@@ -72,7 +70,6 @@ class PostController extends Controller
         
         //storing the image:        
         $post_image->storeAs('public/images', $filename);
-
 
         $post = Post::create([
             'title' => $request->title,
